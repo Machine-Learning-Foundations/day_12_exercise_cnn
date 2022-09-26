@@ -28,7 +28,7 @@ if __name__ == "__main__":
     waldo = (waldo - mean) / std
 
 
-    # Built in function very fast.
+    # Built in function.
     # conv_res = correlate2d(problem_image, waldo, mode="same", boundary="fill")
 
     # Selfmade conv slow
