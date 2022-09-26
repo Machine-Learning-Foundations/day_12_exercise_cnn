@@ -33,7 +33,7 @@ if __name__ == "__main__":
     # Built in function very fast.
     # conv_res = correlate2d(problem_image, waldo, mode="same", boundary="fill")
 
-    # Selfmade ok but too costly in terms of memory.
+    # Selfmade
     conv_res = my_conv(problem_image, waldo)
 
     max = np.argmax(conv_res)
