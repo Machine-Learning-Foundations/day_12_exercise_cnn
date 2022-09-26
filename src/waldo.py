@@ -6,7 +6,7 @@ from PIL import Image
 from custom_conv import my_conv
 
 # from jax.scipy.signal import correlate2d
-# from custom_conv import my_conv_direct
+from custom_conv import my_conv_direct
 
 
 if __name__ == "__main__":
