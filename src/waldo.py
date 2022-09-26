@@ -27,14 +27,15 @@ if __name__ == "__main__":
     problem_image = (problem_image - mean) / std
     waldo = (waldo - mean) / std
 
-    # Too slow does not work.
-    # conv_res = my_conv_direct(problem_image, waldo)
 
     # Built in function very fast.
     # conv_res = correlate2d(problem_image, waldo, mode="same", boundary="fill")
 
-    # Selfmade
-    conv_res = my_conv(problem_image, waldo)
+    # Selfmade conv slow
+    conv_res = my_conv_direct(problem_image, waldo)
+
+    # Selfmade conv fast
+    # conv_res = my_conv(problem_image, waldo)
 
     max = np.argmax(conv_res)
     idx = np.unravel_index(max, conv_res.shape)
