@@ -29,8 +29,6 @@ def get_mnist_test_data() -> Tuple[np.ndarray, np.ndarray]:
     with open("./data/MNIST/t10k-labels-idx1-ubyte", "rb") as f:
         _, size = struct.unpack(">II", f.read(8))
         lbl_data_test = np.array(np.fromfile(f, dtype=np.dtype(np.uint8)))
-    # if gpu:
-    #    return cp.array(img_data_test), cp.array(lbl_data_test)
     return img_data_test, lbl_data_test
 
 
