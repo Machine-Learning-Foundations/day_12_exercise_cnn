@@ -23,7 +23,7 @@ Navigate to the `src/custom_conv.py` module.
 
 #### Task 1.2 (Optional)
 Navigate to the `src/custom_conv.py` module.
-Optional: The function `my_conv` implements a fast version of the convolution operation above using a flattend kernel. We learned about this fast version in the lecture. Have a look at the slides again and then implement `get_indices` to make `my_conv` work. It should return
+The function `my_conv` implements a fast version of the convolution operation above using a flattend kernel. We learned about this fast version in the lecture. Have a look at the slides again and then implement `get_indices` to make `my_conv` work. It should return
 - A matrix of indices following the flattend convolution rule from the lecture, e.g. for a $(2\times 2)$ kernel and a $(3\times 3)$ image it should return the index transformation
 
 $$
@@ -44,7 +44,7 @@ $$
    $$o=(i-k)+1$$
    where $i$ denotes the input size and $k$ the kernel size.
 
-You can test the function with `nox -s test` by importing `my_conv` in pytest and changing `my_conv_direct` to `my_conv` in the test function.Make sure that `src/waldo.py` now uses `my_conv` for convolution and run the script again.
+You can test the function with `nox -s test` by importing `my_conv` in `tests/test_conv.py` and changing `my_conv_direct` to `my_conv` in the test function. Make sure that `src/waldo.py` now uses `my_conv` for convolution and run the script again.
 
 
 
