@@ -4,11 +4,11 @@ import sys
 
 import jax.numpy as jnp
 import numpy as nnp
+import pytest
 from jax.scipy.signal import correlate2d
 
 sys.path.insert(0, "./src/")
 
-import pytest
 
 from src.custom_conv import my_conv_direct
 
@@ -19,7 +19,7 @@ def test_conv(img_shape: tuple, kernel_shape: tuple) -> None:
     """Test the convolution code."""
     img = jnp.eye(*img_shape)
     kernel = jnp.array(nnp.random.uniform(0, 1, kernel_shape))
-    my_res = my_conv(img, kernel)
+    my_res = my_conv_direct(img, kernel)
     res = correlate2d(img, kernel, mode="valid")
 
     assert jnp.allclose(my_res, res)
