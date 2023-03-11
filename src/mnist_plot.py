@@ -8,7 +8,6 @@ from mnist import get_mnist_train_data
 
 
 if __name__ == "__main__":
-
     img_data_train, lbl_data_train = get_mnist_train_data()
     number_squence = img_data_train[0, :, :]
 

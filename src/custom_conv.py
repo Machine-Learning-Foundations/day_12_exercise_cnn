@@ -14,7 +14,7 @@ def my_conv_direct(image: jnp.ndarray, kernel: jnp.ndarray) -> jnp.ndarray:
 
     Return:
         jnp.ndarray: An array with the cross correlation per pixel.
-    
+
     """
     image_rows, image_cols = image.shape
     kernel_rows, kernel_cols = kernel.shape
@@ -29,8 +29,7 @@ def my_conv_direct(image: jnp.ndarray, kernel: jnp.ndarray) -> jnp.ndarray:
     return jnp.stack(corr)
 
 
-
-#@jax.jit
+# @jax.jit
 def get_indices(image: jnp.ndarray, kernel: jnp.ndarray) -> tuple:
     """Optional: Get the indices to set up pixel vectors for convolution by matrix-multiplication.
 

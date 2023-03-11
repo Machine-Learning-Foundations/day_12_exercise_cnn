@@ -76,7 +76,7 @@ def normalize(
         mean = 0.0
     if std is None:
         # TODO: use np.std to compute the standard deviation
-        std = np.std(data)
+        std = 0.0
 
     # TODO: normalize the data: (data - mu)/ sigma
     data_norm = data
@@ -93,7 +93,6 @@ class CNN(nn.Module):
         # See: https://flax.readthedocs.io/en/latest/api_reference/flax.linen.html#compact-methods
         # for more information.
         return x
-
 
 
 # @jax.jit
@@ -115,8 +114,9 @@ def cross_entropy(label: jnp.ndarray, out: jnp.ndarray) -> jnp.ndarray:
 
 
 # @jax.jit
-def forward_pass(weights: FrozenDict, img_batch: jnp.ndarray,
-                 label_batch: jnp.ndarray) -> jnp.ndarray:
+def forward_pass(
+    weights: FrozenDict, img_batch: jnp.ndarray, label_batch: jnp.ndarray
+) -> jnp.ndarray:
     """Do a forward step, by evaluating network and cost function."""
     # TODO: compute the network output. Use cnn.apply .
     out = 0.0
@@ -144,7 +144,6 @@ def get_acc(img_data: jnp.ndarray, label_data: jnp.ndarray) -> float:
 
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser(description="Train Networks on MNIST.")
     parser.add_argument("--lr", type=float, default=0.01, help="Learning Rate")
     args = parser.parse_args()
@@ -164,7 +163,6 @@ if __name__ == "__main__":
     img_data_val, _, _ = normalize(img_data_val, mean, std)
 
     exp_list = []
-
 
     key = jax.random.PRNGKey(key)  # type: ignore
     cnn = CNN()
@@ -196,9 +194,7 @@ if __name__ == "__main__":
         train_acc = get_acc(img_data_train, lbl_data_train)
         val_acc = get_acc(img_data_val, lbl_data_val)
         print(
-            "Train and Validation accuracy: {:3.3f}, {:3.3f}".format(
-                train_acc, val_acc
-            )
+            "Train and Validation accuracy: {:3.3f}, {:3.3f}".format(train_acc, val_acc)
         )
 
     print("Training done. Testing...")
@@ -206,4 +202,3 @@ if __name__ == "__main__":
     img_data_test, mean, std = normalize(img_data_test, mean, std)
     test_acc = get_acc(img_data_test, lbl_data_test)
     print("Done. Test acc: {}".format(test_acc))
-
