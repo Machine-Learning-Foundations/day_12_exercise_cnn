@@ -165,45 +165,46 @@ if __name__ == "__main__":
 
     exp_list = []
 
+    for key in (0, 1, 2, 3, 4):
 
-    key = jax.random.PRNGKey(key)  # type: ignore
-    cnn = CNN()
-    # TODO: initialize the network use
-    # cnn.init .
+        key = jax.random.PRNGKey(key)  # type: ignore
+        cnn = CNN()
+        # TODO: initialize the network use
+        # cnn.init .
 
-    for e in range(epochs):
-        # shuffle the data before every epoch.
-        shuffler = jax.random.permutation(key, len(img_data_train))
-        img_data_train = img_data_train[shuffler]
-        lbl_data_train = lbl_data_train[shuffler]
-        img_batches = np.split(
-            img_data_train, img_data_train.shape[0] // batch_size, axis=0
-        )
-        label_batches = np.split(
-            lbl_data_train, lbl_data_train.shape[0] // batch_size, axis=0
-        )
-        for img_batch, label_batch in tqdm(
-            zip(img_batches, label_batches), total=len(img_batches)
-        ):
-            img_batch, label_batch = (
-                jnp.array(np_array) for np_array in (img_batch, label_batch)
+        for e in range(epochs):
+            # shuffle the data before every epoch.
+            shuffler = jax.random.permutation(key, len(img_data_train))
+            img_data_train = img_data_train[shuffler]
+            lbl_data_train = lbl_data_train[shuffler]
+            img_batches = np.split(
+                img_data_train, img_data_train.shape[0] // batch_size, axis=0
             )
-            # cel = cross_entropy(nn.one_hot(label_batches[no], num_classes=10),
-            #                    out)
-            cel, grads = loss_grad_fn(variables, img_batch, label_batch)
-            variables = sgd_step(variables, grads, args.lr)
-        print("Epoch: {}, loss: {}".format(e, cel))
-        train_acc = get_acc(img_data_train, lbl_data_train)
-        val_acc = get_acc(img_data_val, lbl_data_val)
-        print(
-            "Train and Validation accuracy: {:3.3f}, {:3.3f}".format(
-                train_acc, val_acc
+            label_batches = np.split(
+                lbl_data_train, lbl_data_train.shape[0] // batch_size, axis=0
             )
-        )
+            for img_batch, label_batch in tqdm(
+                zip(img_batches, label_batches), total=len(img_batches)
+            ):
+                img_batch, label_batch = (
+                    jnp.array(np_array) for np_array in (img_batch, label_batch)
+                )
+                # cel = cross_entropy(nn.one_hot(label_batches[no], num_classes=10),
+                #                    out)
+                cel, grads = loss_grad_fn(variables, img_batch, label_batch)
+                variables = sgd_step(variables, grads, args.lr)
+            print("Epoch: {}, loss: {}".format(e, cel))
+            train_acc = get_acc(img_data_train, lbl_data_train)
+            val_acc = get_acc(img_data_val, lbl_data_val)
+            print(
+                "Train and Validation accuracy: {:3.3f}, {:3.3f}".format(
+                    train_acc, val_acc
+                )
+            )
 
-    print("Training done. Testing...")
-    img_data_test, lbl_data_test = get_mnist_test_data()
-    img_data_test, mean, std = normalize(img_data_test, mean, std)
-    test_acc = get_acc(img_data_test, lbl_data_test)
-    print("Done. Test acc: {}".format(test_acc))
+        print("Training done. Testing...")
+        img_data_test, lbl_data_test = get_mnist_test_data()
+        img_data_test, mean, std = normalize(img_data_test, mean, std)
+        test_acc = get_acc(img_data_test, lbl_data_test)
+        print("Done. Test acc: {}".format(test_acc))
 
