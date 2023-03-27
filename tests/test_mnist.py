@@ -62,12 +62,12 @@ testdata2 = [
     (
         jnp.array([[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]]),
         jnp.array([[0.2, 0.12], [0.42, 0.21], [0.22, 0.34]]),
-        jnp.array(0.7511, dtype=jnp.float32),
+        jnp.array(1.5022, dtype=jnp.float32),
     ),
     (
         jnp.array([[1.0, 0.0], [0.0, 0.0], [0.0, 0.0], [0.0, 1.0]]),
         jnp.array([[0.8, 0.11], [0.22, 0.22], [0.1, 0.3], [0.08, 0.19]]),
-        jnp.array(0.3803, dtype=jnp.float32),
+        jnp.array(0.7607, dtype=jnp.float32),
     ),
 ]
 
