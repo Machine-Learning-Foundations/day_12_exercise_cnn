@@ -180,6 +180,8 @@ if __name__ == "__main__":
         label_batches = np.split(
             lbl_data_train, lbl_data_train.shape[0] // batch_size, axis=0
         )
+        
+        train_accs = []
         for img_batch, label_batch in tqdm(
             zip(img_batches, label_batches), total=len(img_batches)
         ):
@@ -190,8 +192,10 @@ if __name__ == "__main__":
             #                    out)
             cel, grads = loss_grad_fn(variables, img_batch, label_batch)
             variables = sgd_step(variables, grads, args.lr)
-        print("Epoch: {}, loss: {}".format(e, cel))
-        train_acc = get_acc(img_data_train, lbl_data_train)
+            train_accs.append(get_acc(img_batch, label_batch))
+        print("Epoch: {}, loss: {}".format(e + 1, cel))
+
+        train_acc = np.mean(train_accs)
         val_acc = get_acc(img_data_val, lbl_data_val)
         print(
             "Train and Validation accuracy: {:3.3f}, {:3.3f}".format(train_acc, val_acc)
