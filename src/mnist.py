@@ -115,7 +115,7 @@ def cross_entropy(label: jnp.ndarray, out: jnp.ndarray) -> jnp.ndarray:
 
 # @jax.jit
 def forward_pass(
-    weights: FrozenDict, img_batch: jnp.ndarray, label_batch: jnp.ndarray
+    variables: FrozenDict, img_batch: jnp.ndarray, label_batch: jnp.ndarray
 ) -> jnp.ndarray:
     """Do a forward step, by evaluating network and cost function."""
     # TODO: compute the network output. Use cnn.apply .
